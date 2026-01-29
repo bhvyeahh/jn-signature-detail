@@ -1,22 +1,39 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-// Initialize Stripe with your Secret Key
+// Initialize Stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-12-15.clover", // Use the latest API version or typescript will complain
+  apiVersion: "2025-12-15.clover", 
 });
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, phone, date, time } = body;
+    
+    const { 
+      serviceId, 
+      addons, 
+      date, 
+      time, 
+      customer, 
+      isMobile, 
+      totalPrice 
+    } = body;
 
-    // Validation
-    if (!name || !email || !date || !time) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    // 1. Validation
+    if (!customer?.name || !customer?.email || !date || !time || !serviceId) {
+      return NextResponse.json({ error: "Missing required booking details" }, { status: 400 });
     }
 
-    // Create the Stripe Checkout Session
+    // 2. URL Fallback (Fixes the specific error you are seeing)
+    // If the env variable is missing, it defaults to localhost
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+    // 3. Descriptions
+    const policyDesc = "Refundable minus $2 fee if cancelled >24hrs in advance. Non-refundable within 24hrs.";
+    const appointmentDesc = `Booking: ${new Date(date).toLocaleDateString()} @ ${time}. Total Value: $${totalPrice}.`;
+
+    // 4. Create Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [
@@ -24,26 +41,28 @@ export async function POST(req: Request) {
           price_data: {
             currency: "usd",
             product_data: {
-              name: `Car Detailing - ${time}`,
-              description: `Booking for ${new Date(date).toLocaleDateString()} at ${time}`,
+              name: `Booking Deposit - ${serviceId.toUpperCase()}`,
+              description: `${appointmentDesc} | POLICY: ${policyDesc}`,
             },
-            unit_amount: 1000, // $10.00 (in cents)
+            unit_amount: 3000, // Fixed $30.00 Deposit
           },
           quantity: 1,
         },
       ],
       mode: "payment",
-      // These URLs are where the user goes after payment
-      success_url: `${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_URL}/booking`,
+      // Uses the safe 'baseUrl' variable
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/booking`,
       
-      // CRITICAL: We pass the user's info in metadata so the Webhook can read it later
       metadata: {
-        customerName: name,
-        customerEmail: email,
-        customerPhone: phone || "",
+        customerName: customer.name,
+        customerEmail: customer.email,
+        customerPhone: customer.phone || "",
         appointmentDate: date,
         timeSlot: time,
+        serviceType: serviceId,
+        isMobile: String(isMobile),
+        totalVal: String(totalPrice),
       },
     });
 

@@ -8,7 +8,7 @@ import CustomerCancelEmail from "@/components/emails/CustomerCancelEmail";
 import OwnerNotificationEmail from "@/components/emails/OwnerNotificationEmail";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-12-15.clover" as any,
+  apiVersion: "2025-12-15.clover", // Use standard API version
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -19,6 +19,7 @@ export async function POST(req: Request) {
 
     await connectToDatabase();
 
+    // 1. Find Booking
     const booking = await Booking.findOne({ managementToken: token });
 
     if (!booking) {
@@ -26,9 +27,10 @@ export async function POST(req: Request) {
     }
 
     if (booking.status === "cancelled") {
-      return NextResponse.json({ error: "Already cancelled" }, { status: 400 });
+      return NextResponse.json({ error: "Booking is already cancelled" }, { status: 400 });
     }
 
+    // 2. Calculate Time Difference
     const appointmentTime = new Date(booking.appointmentDate);
     const now = new Date();
     const hoursDifference = differenceInHours(appointmentTime, now);
@@ -40,62 +42,71 @@ export async function POST(req: Request) {
     let refundMessage = "";
     let refundAmountString = "";
 
-    // LOGIC BRANCH
+    // 3. Logic Branch
     if (hoursDifference >= 24) {
-      // ✅ REFUND $9.00
-      const session = await stripe.checkout.sessions.retrieve(booking.stripeSessionId);
-      const paymentIntentId = session.payment_intent as string;
+      // ✅ MORE THAN 24 HOURS: REFUND $28.00
+      try {
+        const session = await stripe.checkout.sessions.retrieve(booking.stripeSessionId);
+        const paymentIntentId = session.payment_intent as string;
 
-      await stripe.refunds.create({
-        payment_intent: paymentIntentId,
-        amount: 900, // $9.00
-      });
+        // Create Partial Refund of $28.00 (2800 cents)
+        await stripe.refunds.create({
+          payment_intent: paymentIntentId,
+          amount: 2800, 
+        });
 
-      booking.status = "cancelled";
-      booking.paymentStatus = "refunded";
-      refundMessage = "Booking cancelled. $9.00 refunded ($1 processing fee).";
-      refundAmountString = "$9.00";
+        booking.paymentStatus = "refunded_partial";
+        refundMessage = "Booking cancelled. $28.00 has been refunded to your card ($2 fee retained).";
+        refundAmountString = "$28.00";
+      } catch (err: any) {
+        console.error("Stripe Refund Failed:", err);
+        return NextResponse.json({ error: "Refund failed. Please contact support." }, { status: 500 });
+      }
     
     } else {
-      // ❌ NO REFUND
-      booking.status = "cancelled";
-      refundMessage = "Booking cancelled. No refund (less than 24h notice).";
+      // ❌ LESS THAN 24 HOURS: NO REFUND
+      booking.paymentStatus = "forfeited";
+      refundMessage = "Booking cancelled. Deposit is non-refundable due to late notice (<24h).";
       refundAmountString = "$0.00 (Late Cancellation)";
     }
 
-    // Save DB changes
+    // 4. Update Status & Save
+    booking.status = "cancelled";
     await booking.save();
 
-    // 📧 SEND EMAILS
+    // 5. Send Emails
     if (process.env.RESEND_API_KEY) {
         
-      // 1. Email to Customer
+      // Email to Customer
       await resend.emails.send({
-        from: 'Car Detail App <onboarding@resend.dev>',
+        from: 'JN Signature <bookings@resend.dev>',
         to: booking.customerEmail,
         subject: 'Booking Cancelled',
         react: CustomerCancelEmail({
           customerName: booking.customerName,
           date: formattedDate,
           refundAmount: refundAmountString,
-        })as any,
+        }) as any,
       });
 
-      // 2. Email to Owner (Alert!)
+      // Email to Owner
       if (process.env.OWNER_EMAIL) {
         await resend.emails.send({
-          from: 'Car Detail App <onboarding@resend.dev>',
+          from: 'JN System <bookings@resend.dev>',
           to: process.env.OWNER_EMAIL,
           subject: `CANCELLED: ${booking.customerName} ❌`,
           react: OwnerNotificationEmail({
-            type: 'cancelled',
+            type: 'cancelled', // You need to handle this type in your Owner Email Component
             customerName: booking.customerName,
             customerEmail: booking.customerEmail,
             customerPhone: booking.customerPhone,
             date: formattedDate,
             time: booking.timeSlot,
-            price: refundAmountString === "$9.00" ? "Refunded $9" : "Kept $10 (Late)",
-          })as any,
+            serviceName: booking.serviceType,
+            isMobile: booking.isMobile,
+            totalPrice: refundAmountString === "$28.00" ? "Refunded $28" : "Kept Full Deposit",
+            remainingDue: "$0.00"
+          }) as any,
         });
       }
     }
