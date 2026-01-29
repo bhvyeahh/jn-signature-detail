@@ -72,7 +72,7 @@ export async function POST(req: Request) {
       });
 
       // Construct the Management URL
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+      const baseUrl = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
       const manageUrl = `${baseUrl}/manage/${manageToken}`;
 
       if (process.env.RESEND_API_KEY) {

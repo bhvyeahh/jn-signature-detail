@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     // 2. URL Fallback (Fixes the specific error you are seeing)
     // If the env variable is missing, it defaults to localhost
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
 
     // 3. Descriptions
     const policyDesc = "Refundable minus $2 fee if cancelled >24hrs in advance. Non-refundable within 24hrs.";
