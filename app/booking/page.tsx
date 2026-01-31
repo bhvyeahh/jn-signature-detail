@@ -82,16 +82,16 @@ const StepIndicator = ({ step }: { step: number }) => (
           className={cn(
             "w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs font-bold transition-all duration-500 border",
             step === num 
-              ? "bg-red-600 border-red-600 text-white shadow-[0_0_20px_rgba(220,38,38,0.5)]" 
+              ? "bg-blue-600 border-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)]" 
               : step > num 
-                ? "bg-red-900/30 border-red-600/50 text-red-500"
+                ? "bg-blue-900/30 border-blue-600/50 text-blue-500"
                 : "bg-zinc-900 border-white/10 text-gray-600"
           )}
         >
           {step > num ? <Check className="w-4 h-4" /> : `0${num}`}
         </div>
         {num < 4 && (
-          <div className={cn("w-8 md:w-16 h-[1px] mx-2 transition-colors duration-500", step > num ? "bg-red-600/50" : "bg-white/10")} />
+          <div className={cn("w-8 md:w-16 h-[1px] mx-2 transition-colors duration-500", step > num ? "bg-blue-600/50" : "bg-white/10")} />
         )}
       </div>
     ))}
@@ -169,7 +169,7 @@ export default function BookingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white font-sans selection:bg-red-600 selection:text-white flex flex-col md:flex-row">
+    <main className="min-h-screen bg-black text-white font-sans selection:bg-blue-600 selection:text-white flex flex-col md:flex-row">
       
       {/* LEFT SIDEBAR (Sticky on Desktop, Static on Mobile) */}
       <div className="w-full md:w-[400px] bg-zinc-950 border-b md:border-b-0 md:border-r border-white/10 p-6 md:p-8 flex flex-col md:h-screen md:sticky md:top-0 z-30">
@@ -178,18 +178,18 @@ export default function BookingPage() {
         <div className="flex items-center justify-between md:block mb-6 md:mb-8">
            <div>
              <Link href="/" className="flex items-center gap-2 mb-2 cursor-pointer hover:opacity-80 transition-opacity">
-               <ArrowLeft className="w-4 h-4 text-red-500" />
-               <span className="text-red-500 font-mono text-[10px] uppercase tracking-widest">Back Home</span>
+               <ArrowLeft className="w-4 h-4 text-blue-500" />
+               <span className="text-blue-500 font-mono text-[10px] uppercase tracking-widest">Back Home</span>
              </Link>
              <h1 className="text-2xl md:text-3xl font-black font-orbitron tracking-tighter italic">
-               BUILD YOUR <br /><span className="text-red-600">PACKAGE</span>
+               BUILD YOUR <br /><span className="text-blue-600">PACKAGE</span>
              </h1>
            </div>
            
            {/* Mobile Total Badge */}
            <div className="md:hidden text-right">
              <div className="text-[10px] text-gray-500 uppercase">Est. Total</div>
-             <div className="text-xl font-bold font-mono text-red-500">${total}</div>
+             <div className="text-xl font-bold font-mono text-blue-500">${total}</div>
            </div>
         </div>
 
@@ -199,7 +199,7 @@ export default function BookingPage() {
           {/* Service Mode */}
           <div className="flex justify-between items-center py-3 border-b border-white/5">
             <span className="text-gray-500 text-sm">Service Mode</span>
-            <span className={cn("text-sm font-bold", isMobile ? "text-red-400" : "text-white")}>
+            <span className={cn("text-sm font-bold", isMobile ? "text-blue-400" : "text-white")}>
               {isMobile ? "Mobile Service" : "Shop Drop-off"}
             </span>
           </div>
@@ -242,13 +242,13 @@ export default function BookingPage() {
           {/* Date Time */}
           {time && (
              <div className="py-3 border-b border-white/5">
-                <span className="text-gray-500 text-sm block mb-1">Appointment</span>
-                <div className="text-white font-bold flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-red-500" />
-                  {format(date, "MMM dd")} 
-                  <span className="text-gray-600">|</span> 
-                  {time}
-                </div>
+               <span className="text-gray-500 text-sm block mb-1">Appointment</span>
+               <div className="text-white font-bold flex items-center gap-2">
+                 <Calendar className="w-4 h-4 text-blue-500" />
+                 {format(date, "MMM dd")} 
+                 <span className="text-gray-600">|</span> 
+                 {time}
+               </div>
              </div>
           )}
         </div>
@@ -256,12 +256,12 @@ export default function BookingPage() {
         {/* Desktop Total Footer */}
         <div className="hidden md:block mt-auto pt-6 border-t border-white/10 bg-zinc-950">
            <div className="flex justify-between items-end mb-2">
-              <span className="text-gray-500 text-sm uppercase tracking-widest">Total Value</span>
-              <div className="text-4xl font-black font-orbitron text-white tracking-tighter">${total}</div>
+             <span className="text-gray-500 text-sm uppercase tracking-widest">Total Value</span>
+             <div className="text-4xl font-black font-orbitron text-white tracking-tighter">${total}</div>
            </div>
            <div className="flex justify-between items-center text-sm">
-              <span className="text-red-500 font-bold uppercase">Due Now</span>
-              <span className="font-mono text-red-500 font-bold">${deposit}</span>
+             <span className="text-blue-500 font-bold uppercase">Due Now</span>
+             <span className="font-mono text-blue-500 font-bold">${deposit}</span>
            </div>
         </div>
       </div>
@@ -299,7 +299,7 @@ export default function BookingPage() {
                       onClick={() => setIsMobile(true)}
                       className={cn(
                         "p-6 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between h-32 relative overflow-hidden",
-                        isMobile ? "bg-red-600 border-red-600" : "bg-zinc-900 border-white/10 hover:bg-zinc-800"
+                        isMobile ? "bg-blue-600 border-blue-600" : "bg-zinc-900 border-white/10 hover:bg-zinc-800"
                       )}
                     >
                       <Car className="w-6 h-6 text-white" />
@@ -323,19 +323,19 @@ export default function BookingPage() {
                          className={cn(
                            "cursor-pointer p-6 md:p-8 rounded-2xl border transition-all duration-300 relative group",
                            selectedPackage === pkg.id 
-                             ? "bg-zinc-900 border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.1)]" 
+                             ? "bg-zinc-900 border-blue-600 shadow-[0_0_20px_rgba(37,99,235,0.1)]" 
                              : "bg-zinc-900/40 border-white/5 hover:border-white/20"
                          )}
                        >
                          {pkg.tag && (
-                           <div className="absolute top-0 right-0 bg-gradient-to-l from-red-600 to-red-500 text-white text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-widest shadow-lg">
+                           <div className="absolute top-0 right-0 bg-gradient-to-l from-blue-600 to-blue-500 text-white text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-widest shadow-lg">
                              {pkg.tag}
                            </div>
                          )}
                          
                          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
                             <div className="flex items-center gap-5">
-                               <div className={cn("w-14 h-14 rounded-full flex items-center justify-center transition-colors shrink-0", selectedPackage === pkg.id ? "bg-red-600 text-white" : "bg-zinc-950 border border-white/10 text-gray-500")}>
+                               <div className={cn("w-14 h-14 rounded-full flex items-center justify-center transition-colors shrink-0", selectedPackage === pkg.id ? "bg-blue-600 text-white" : "bg-zinc-950 border border-white/10 text-gray-500")}>
                                  <pkg.icon className="w-7 h-7" />
                                </div>
                                <div>
@@ -351,7 +351,7 @@ export default function BookingPage() {
                          <div className="grid md:grid-cols-2 gap-y-2 gap-x-8 border-t border-white/5 pt-4">
                             {pkg.features.map((f, i) => (
                               <div key={i} className="flex items-center gap-3 text-sm text-gray-400">
-                                <Check className={cn("w-4 h-4", selectedPackage === pkg.id ? "text-red-500" : "text-gray-600")} /> 
+                                <Check className={cn("w-4 h-4", selectedPackage === pkg.id ? "text-blue-500" : "text-gray-600")} /> 
                                 {f}
                               </div>
                             ))}
@@ -391,13 +391,13 @@ export default function BookingPage() {
                         className={cn(
                           "cursor-pointer p-5 rounded-xl border transition-all flex items-center justify-between group",
                           selectedAddons.includes(addon.id) 
-                            ? "bg-zinc-900 border-red-600 shadow-[0_0_15px_rgba(220,38,38,0.15)]" 
+                            ? "bg-zinc-900 border-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.15)]" 
                             : "bg-zinc-900/30 border-white/10 hover:border-white/30",
-                          addon.highlight && !selectedAddons.includes(addon.id) ? "border-red-600/40" : ""
+                          addon.highlight && !selectedAddons.includes(addon.id) ? "border-blue-600/40" : ""
                         )}
                       >
-                         <div className="flex items-center gap-4">
-                            <div className={cn("w-6 h-6 rounded border flex items-center justify-center transition-colors", selectedAddons.includes(addon.id) ? "bg-red-600 border-red-600" : "border-gray-600 bg-black")}>
+                          <div className="flex items-center gap-4">
+                            <div className={cn("w-6 h-6 rounded border flex items-center justify-center transition-colors", selectedAddons.includes(addon.id) ? "bg-blue-600 border-blue-600" : "border-gray-600 bg-black")}>
                                {selectedAddons.includes(addon.id) && <Check className="w-4 h-4 text-white" />}
                             </div>
                             <div>
@@ -407,8 +407,8 @@ export default function BookingPage() {
                                </div>
                                {addon.desc && <div className="text-xs text-gray-500 mt-0.5">{addon.desc}</div>}
                             </div>
-                         </div>
-                         <div className="font-mono font-bold text-gray-300 group-hover:text-white transition-colors">+${addon.price}</div>
+                          </div>
+                          <div className="font-mono font-bold text-gray-300 group-hover:text-white transition-colors">+${addon.price}</div>
                       </div>
                     ))}
                  </div>
@@ -434,7 +434,7 @@ export default function BookingPage() {
                       const isSelected = format(d, "yyyy-MM-dd") === format(date, "yyyy-MM-dd");
                       return (
                         <button key={i} onClick={() => setDate(d)}
-                          className={cn("flex-shrink-0 w-20 h-24 rounded-2xl flex flex-col items-center justify-center border transition-all snap-start group", isSelected ? "bg-red-600 text-white border-red-600 font-bold shadow-lg scale-105" : "bg-zinc-900 border-white/10 text-gray-400 hover:border-red-600/50 hover:bg-zinc-800")}
+                          className={cn("flex-shrink-0 w-20 h-24 rounded-2xl flex flex-col items-center justify-center border transition-all snap-start group", isSelected ? "bg-blue-600 text-white border-blue-600 font-bold shadow-lg scale-105" : "bg-zinc-900 border-white/10 text-gray-400 hover:border-blue-600/50 hover:bg-zinc-800")}
                         >
                           <span className="text-xs uppercase mb-1 opacity-70">{format(d, "EEE")}</span>
                           <span className="text-2xl font-mono group-hover:text-white transition-colors">{format(d, "dd")}</span>
@@ -478,22 +478,22 @@ export default function BookingPage() {
                 
                 <div className="space-y-4">
                   <div>
-                     <label className="text-xs text-gray-500 uppercase font-bold ml-1 mb-1 block">Full Name</label>
-                     <input type="text" placeholder="John Doe" className="w-full bg-zinc-900/50 border border-white/10 p-4 rounded-xl text-white placeholder:text-gray-700 focus:border-red-600 outline-none transition-colors" value={details.name} onChange={(e) => setDetails({...details, name: e.target.value})} />
+                      <label className="text-xs text-gray-500 uppercase font-bold ml-1 mb-1 block">Full Name</label>
+                      <input type="text" placeholder="John Doe" className="w-full bg-zinc-900/50 border border-white/10 p-4 rounded-xl text-white placeholder:text-gray-700 focus:border-blue-600 outline-none transition-colors" value={details.name} onChange={(e) => setDetails({...details, name: e.target.value})} />
                   </div>
                   <div>
-                     <label className="text-xs text-gray-500 uppercase font-bold ml-1 mb-1 block">Email Address</label>
-                     <input type="email" placeholder="john@example.com" className="w-full bg-zinc-900/50 border border-white/10 p-4 rounded-xl text-white placeholder:text-gray-700 focus:border-red-600 outline-none transition-colors" value={details.email} onChange={(e) => setDetails({...details, email: e.target.value})} />
+                      <label className="text-xs text-gray-500 uppercase font-bold ml-1 mb-1 block">Email Address</label>
+                      <input type="email" placeholder="john@example.com" className="w-full bg-zinc-900/50 border border-white/10 p-4 rounded-xl text-white placeholder:text-gray-700 focus:border-blue-600 outline-none transition-colors" value={details.email} onChange={(e) => setDetails({...details, email: e.target.value})} />
                   </div>
                   <div>
-                     <label className="text-xs text-gray-500 uppercase font-bold ml-1 mb-1 block">Phone Number</label>
-                     <input type="tel" placeholder="(555) 000-0000" className="w-full bg-zinc-900/50 border border-white/10 p-4 rounded-xl text-white placeholder:text-gray-700 focus:border-red-600 outline-none transition-colors" value={details.phone} onChange={(e) => setDetails({...details, phone: e.target.value})} />
+                      <label className="text-xs text-gray-500 uppercase font-bold ml-1 mb-1 block">Phone Number</label>
+                      <input type="tel" placeholder="(555) 000-0000" className="w-full bg-zinc-900/50 border border-white/10 p-4 rounded-xl text-white placeholder:text-gray-700 focus:border-blue-600 outline-none transition-colors" value={details.phone} onChange={(e) => setDetails({...details, phone: e.target.value})} />
                   </div>
                 </div>
 
                 <div className="bg-gradient-to-br from-zinc-900 to-black border border-white/10 p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-center shadow-2xl">
-                  <div className="w-12 h-12 bg-red-600/20 rounded-full flex items-center justify-center shrink-0">
-                    <Shield className="w-6 h-6 text-red-500" />
+                  <div className="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center shrink-0">
+                    <Shield className="w-6 h-6 text-blue-500" />
                   </div>
                   <div className="flex-1 text-center md:text-left">
                     <h3 className="font-bold text-white mb-1">Secure Your Spot ($30 Deposit)</h3>
@@ -504,7 +504,7 @@ export default function BookingPage() {
                   </div>
                 </div>
 
-                <button onClick={handleSubmit} disabled={loading || !details.name || !details.email || !details.phone} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_40px_rgba(220,38,38,0.4)] transition-all transform active:scale-[0.98]">
+                <button onClick={handleSubmit} disabled={loading || !details.name || !details.email || !details.phone} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all transform active:scale-[0.98]">
                   {loading ? <Loader2 className="animate-spin" /> : `Pay $${deposit} Deposit & Book`}
                 </button>
               </motion.div>

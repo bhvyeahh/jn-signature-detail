@@ -113,7 +113,7 @@ const Navbar = () => {
         <div className="bg-zinc-900/40 backdrop-blur-xl border border-white/10 px-6 py-3 rounded-full flex items-center gap-8 pointer-events-auto shadow-2xl">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform">
               <span className="font-black text-white italic text-sm">JN</span>
             </div>
             <span className="font-bold text-[10px] tracking-[0.2em] uppercase text-white hidden sm:block">Signature</span>
@@ -132,7 +132,7 @@ const Navbar = () => {
 
           {/* Action */}
           <div className="flex items-center gap-4">
-            <Link href="/booking" className="text-[10px] font-bold uppercase tracking-widest text-red-500 hover:text-red-400 transition-colors">
+            <Link href="/booking" className="text-[10px] font-bold uppercase tracking-widest text-blue-500 hover:text-blue-400 transition-colors">
               Book Now
             </Link>
             <button onClick={() => setIsOpen(true)} className="md:hidden text-white">
@@ -151,7 +151,7 @@ const Navbar = () => {
           >
             <button onClick={() => setIsOpen(false)} className="absolute top-10 right-10 text-white"><X className="w-8 h-8"/></button>
             {menuLinks.map((link) => (
-              <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-4xl font-black font-orbitron text-white mb-6 uppercase italic hover:text-red-600 transition-colors">{link.name}</a>
+              <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-4xl font-black font-orbitron text-white mb-6 uppercase italic hover:text-blue-600 transition-colors">{link.name}</a>
             ))}
           </motion.div>
         )}
@@ -209,7 +209,7 @@ const Hero = () => {
       <div ref={curtainRef} className="absolute inset-0 z-[60] bg-black flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <span className="font-orbitron font-black text-white italic tracking-tighter text-4xl animate-pulse">JN</span>
-          <div className="w-12 h-[2px] bg-red-600 animate-width" />
+          <div className="w-12 h-[2px] bg-blue-600 animate-width" />
         </div>
       </div>
 
@@ -234,8 +234,8 @@ const Hero = () => {
           {/* Left Side: Bold Typography */}
           <div ref={leftTextRef} className="flex flex-col">
             <div className="flex items-center gap-3 mb-4">
-              <span className="h-[1px] w-8 bg-red-600"></span>
-              <span className="text-red-600 font-mono text-xs uppercase tracking-[0.4em]">The Standard of Shine</span>
+              <span className="h-[1px] w-8 bg-blue-600"></span>
+              <span className="text-blue-600 font-mono text-xs uppercase tracking-[0.4em]">The Standard of Shine</span>
             </div>
             <h1 className="text-6xl md:text-[8vw] font-black font-orbitron leading-[0.85] text-white italic uppercase tracking-tighter">
               BEYOND <br /> 
@@ -245,14 +245,14 @@ const Hero = () => {
 
           {/* Right Side: Description & CTA */}
           <div ref={rightTextRef} className="md:pt-32">
-            <div className="bg-black/20 backdrop-blur-md border-l-2 border-red-600 p-8 rounded-r-xl">
+            <div className="bg-black/20 backdrop-blur-md border-l-2 border-blue-600 p-8 rounded-r-xl">
               <p className="text-gray-200 text-lg md:text-xl max-w-md leading-relaxed mb-8">
                 Premium automotive preservation for those who value every detail. From daily drivers to exotic collections.
               </p>
               
               <div className="flex items-center gap-6">
                 <Link href="/booking">
-                  <button className="px-10 py-5 bg-white text-black font-black uppercase text-xs tracking-widest hover:bg-red-600 hover:text-white transition-all duration-500 transform hover:scale-105 active:scale-95">
+                  <button className="px-10 py-5 bg-white text-black font-black uppercase text-xs tracking-widest hover:bg-blue-600 hover:text-white transition-all duration-500 transform hover:scale-105 active:scale-95">
                     Book Service
                   </button>
                 </Link>
@@ -271,12 +271,12 @@ const Hero = () => {
       {/* Animated Scroll Indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
          <span className="text-[8px] uppercase tracking-[0.3em] text-white/40 mb-2">Discovery</span>
-         <div className="w-[1px] h-16 bg-gradient-to-b from-red-600 to-transparent relative overflow-hidden">
-            <motion.div 
-              animate={{ y: [0, 64] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-              className="absolute top-0 left-0 w-full h-1/2 bg-white"
-            />
+         <div className="w-[1px] h-16 bg-gradient-to-b from-blue-600 to-transparent relative overflow-hidden">
+           <motion.div 
+             animate={{ y: [0, 64] }}
+             transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+             className="absolute top-0 left-0 w-full h-1/2 bg-white"
+           />
          </div>
       </div>
     </section>
@@ -285,7 +285,7 @@ const Hero = () => {
 
 const Marquee = () => {
   return (
-    <div className="relative z-30 bg-red-600 py-3 overflow-hidden border-y-4 border-black">
+    <div className="relative z-30 bg-blue-600 py-3 overflow-hidden border-y-4 border-black">
       <div className="flex gap-8 animate-marquee whitespace-nowrap">
         {Array(10).fill("JN SIGNATURE • MOBILE DETAILING • CERAMIC COATING • PAINT CORRECTION •").map((text, i) => (
           <span key={i} className="text-2xl font-black italic text-black font-orbitron tracking-tighter">
@@ -340,7 +340,7 @@ const Services = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-20">
           <div>
             <h2 className="text-4xl md:text-7xl font-black font-orbitron text-white uppercase mb-4">
-              Service <span className="text-red-600">Menu</span>
+              Service <span className="text-blue-600">Menu</span>
             </h2>
             <p className="text-gray-400 max-w-sm">
               From maintenance washes to concours-level paint correction.
@@ -353,12 +353,12 @@ const Services = () => {
             <div key={i} className={cn(
               "group relative flex flex-col justify-between p-8 rounded-2xl border transition-all duration-500 overflow-hidden",
               s.isPopular 
-                ? "bg-zinc-900 border-red-600 shadow-[0_0_30px_rgba(220,38,38,0.15)]" 
-                : "bg-zinc-900/50 border-white/10 hover:border-red-600/50"
+                ? "bg-zinc-900 border-blue-600 shadow-[0_0_30px_rgba(37,99,235,0.15)]" 
+                : "bg-zinc-900/50 border-white/10 hover:border-blue-600/50"
             )}>
               {/* Popular Tag */}
               {s.isPopular && (
-                <div className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-widest">
+                <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-widest">
                   Most Popular 🔥
                 </div>
               )}
@@ -367,7 +367,7 @@ const Services = () => {
                 <div className="flex justify-between items-start mb-6">
                   <div className={cn(
                     "w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-colors",
-                    s.isPopular ? "bg-red-600 text-white" : "bg-white/5 text-gray-400 group-hover:text-red-500"
+                    s.isPopular ? "bg-blue-600 text-white" : "bg-white/5 text-gray-400 group-hover:text-blue-500"
                   )}>
                     <s.icon className="w-6 h-6" />
                   </div>
@@ -380,7 +380,7 @@ const Services = () => {
                 <div className="space-y-6">
                   {s.details.map((section, idx) => (
                     <div key={idx}>
-                      <span className="text-xs font-bold text-red-500 uppercase tracking-widest mb-2 block">{section.label}</span>
+                      <span className="text-xs font-bold text-blue-500 uppercase tracking-widest mb-2 block">{section.label}</span>
                       <ul className="space-y-2">
                         {section.items.map((item, k) => (
                           <li key={k} className="flex items-start gap-2 text-sm text-gray-300">
@@ -395,12 +395,12 @@ const Services = () => {
               </div>
 
               <div className="mt-8 pt-6 border-t border-white/10">
-                 <Link href="/booking">
-                   <button className="w-full py-4 rounded-lg bg-white/5 hover:bg-red-600 hover:text-white border border-white/10 hover:border-red-600 transition-all font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 group-hover:bg-white group-hover:text-black">
-                     Book {s.title}
-                     <ArrowUpRight className="w-4 h-4" />
-                   </button>
-                 </Link>
+                  <Link href="/booking">
+                    <button className="w-full py-4 rounded-lg bg-white/5 hover:bg-blue-600 hover:text-white border border-white/10 hover:border-blue-600 transition-all font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 group-hover:bg-white group-hover:text-black">
+                      Book {s.title}
+                      <ArrowUpRight className="w-4 h-4" />
+                    </button>
+                  </Link>
               </div>
             </div>
           ))}
@@ -421,29 +421,29 @@ const Reviews = () => {
 
   return (
     <section id="reviews" className="py-32 bg-black border-t border-white/5 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_rgba(220,38,38,0.05),_transparent_40%)] pointer-events-none" />
+      {/* Background decoration - Adjusted RGB for Blue */}
+      <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_rgba(37,99,235,0.05),_transparent_40%)] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-6xl font-bold font-orbitron text-white mb-4">
-            Client <span className="text-red-600">Feedback</span>
+            Client <span className="text-blue-600">Feedback</span>
           </h2>
-          <div className="flex justify-center gap-1 text-red-600">
+          <div className="flex justify-center gap-1 text-blue-600">
             {[1,2,3,4,5].map(i => <Star key={i} className="fill-current w-5 h-5" />)}
           </div>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
           {reviews.map((r, i) => (
-            <div key={i} className="group p-8 rounded-2xl bg-zinc-900/40 hover:bg-zinc-900/80 border border-white/5 hover:border-red-600/30 transition-all duration-300 relative">
+            <div key={i} className="group p-8 rounded-2xl bg-zinc-900/40 hover:bg-zinc-900/80 border border-white/5 hover:border-blue-600/30 transition-all duration-300 relative">
               <Quote className="absolute top-8 right-8 text-white/5 w-10 h-10" />
-              <div className="flex gap-1 text-red-600 mb-6">
+              <div className="flex gap-1 text-blue-600 mb-6">
                 {[...Array(r.rating)].map((_, i) => <Star key={i} className="fill-current w-3 h-3" />)}
               </div>
               <p className="text-lg text-gray-300 mb-8 leading-relaxed italic">"{r.text}"</p>
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-gradient-to-tr from-red-600 to-red-800 rounded-full flex items-center justify-center font-bold text-white text-sm">
+                <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-blue-800 rounded-full flex items-center justify-center font-bold text-white text-sm">
                   {r.name.charAt(0)}
                 </div>
                 <div>
@@ -475,10 +475,10 @@ const Gallery = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="flex justify-between items-end mb-12">
            <h2 className="text-3xl md:text-5xl font-black font-orbitron text-white uppercase">
-             Recent <span className="text-red-600">Work</span>
+             Recent <span className="text-blue-600">Work</span>
            </h2>
            <div className="hidden md:flex items-center gap-2 text-sm font-bold text-white">
-             <Camera className="text-red-600 w-4 h-4" />
+             <Camera className="text-blue-600 w-4 h-4" />
              <span>Follow on Instagram</span>
            </div>
         </div>
@@ -523,8 +523,8 @@ const Gallery = () => {
                alt="Showcase 4" 
                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-red-500 font-bold uppercase tracking-widest text-xs border border-red-500 px-4 py-2 rounded-full">View All</span>
+             <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+               <span className="text-blue-500 font-bold uppercase tracking-widest text-xs border border-blue-500 px-4 py-2 rounded-full">View All</span>
              </div>
           </div>
         </div>
@@ -540,7 +540,7 @@ const About = () => {
     <section id="about" className="py-32 bg-zinc-950 relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-16 items-center">
         <div className="relative">
-          <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-red-600 z-10" />
+          <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-blue-600 z-10" />
           <img 
             src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=1964&auto=format&fit=crop" 
             alt="The Detailer" 
@@ -549,18 +549,18 @@ const About = () => {
         </div>
         <div>
           <h2 className="text-4xl md:text-6xl font-black font-orbitron text-white uppercase mb-8 italic">
-            JN <span className="text-red-600">Heritage</span>
+            JN <span className="text-blue-600">Heritage</span>
           </h2>
           <p className="text-gray-300 text-lg leading-relaxed mb-6">
             At JN-Signature Detailing, we treat every vehicle like a masterpiece. Born from an obsession with automotive lines and showroom depth, we've brought elite-level detailing directly to your driveway.
           </p>
           <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
             <div>
-              <div className="text-3xl font-bold text-red-600 font-orbitron">100%</div>
+              <div className="text-3xl font-bold text-blue-600 font-orbitron">100%</div>
               <div className="text-xs text-gray-500 uppercase tracking-widest">Mobile Studio</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-red-600 font-orbitron">5-Star</div>
+              <div className="text-3xl font-bold text-blue-600 font-orbitron">5-Star</div>
               <div className="text-xs text-gray-500 uppercase tracking-widest">Client Rating</div>
             </div>
           </div>
@@ -585,12 +585,12 @@ const Policies = () => {
     <section id="policies" className="py-24 bg-black border-y border-white/5">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold font-orbitron text-white uppercase">Client <span className="text-red-600">Protocols</span></h2>
+          <h2 className="text-3xl font-bold font-orbitron text-white uppercase">Client <span className="text-blue-600">Protocols</span></h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {policies.map((p, i) => (
-             <div key={i} className="group p-6 rounded-xl border border-white/5 bg-zinc-900/20 hover:border-red-600/50 transition-all">
-                <div className="w-10 h-10 rounded-full border border-red-600 flex items-center justify-center text-red-600 font-bold mb-4 group-hover:bg-red-600 group-hover:text-white transition-all">
+             <div key={i} className="group p-6 rounded-xl border border-white/5 bg-zinc-900/20 hover:border-blue-600/50 transition-all">
+                <div className="w-10 h-10 rounded-full border border-blue-600 flex items-center justify-center text-blue-600 font-bold mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all">
                   {p.number}
                 </div>
                 <h4 className="text-white font-bold uppercase mb-2">{p.title}</h4>
@@ -612,17 +612,17 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start mb-24">
           <div>
             <h2 className="text-[10vw] leading-[0.8] font-black font-orbitron text-white tracking-tighter mb-8 italic">
-              JN-SIG<span className="text-red-600">.</span>
+              JN-SIG<span className="text-blue-600">.</span>
             </h2>
             <div className="flex flex-col gap-4">
                <div className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-pointer">
-                 <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-red-600 hover:border-red-600 hover:text-white transition-all">
+                 <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 hover:text-white transition-all">
                    <MapPin className="w-4 h-4" />
                  </div>
                  <span>Melbourne & Mobile Service</span>
                </div>
                <div className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-pointer">
-                 <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-red-600 hover:border-red-600 hover:text-white transition-all">
+                 <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 hover:text-white transition-all">
                    <Phone className="w-4 h-4" />
                  </div>
                  <span>(555) 987-6543 (DEMO)</span>
@@ -633,7 +633,7 @@ const Footer = () => {
           <div className="mt-12 md:mt-0 text-right">
               <Link href="#configurator">
                  <div className="group inline-flex items-center gap-4 cursor-pointer">
-                   <span className="text-4xl md:text-6xl font-black text-white uppercase font-orbitron group-hover:text-red-600 transition-colors">
+                   <span className="text-4xl md:text-6xl font-black text-white uppercase font-orbitron group-hover:text-blue-600 transition-colors">
                      Book Now
                    </span>
                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -651,8 +651,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-gray-600 font-mono uppercase">
            <span>© 2026 JN-Signature Detailing</span>
            <div className="flex gap-8 mt-4 md:mt-0">
-             <a href="#" className="hover:text-red-500 transition-colors">Instagram</a>
-             <a href="#" className="hover:text-red-500 transition-colors">Facebook</a>
+             <a href="#" className="hover:text-blue-500 transition-colors">Instagram</a>
+             <a href="#" className="hover:text-blue-500 transition-colors">Facebook</a>
            </div>
         </div>
       </div>
@@ -664,14 +664,14 @@ export default function Home() {
   const { x, y } = useMousePosition();
   
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
+    <main className="min-h-screen bg-black text-white selection:bg-blue-600 selection:text-white overflow-x-hidden">
       
 
       <Grain />
       
       {/* Custom Cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 rounded-full bg-red-600 pointer-events-none z-[100] hidden md:block mix-blend-difference"
+        className="fixed top-0 left-0 w-4 h-4 rounded-full bg-blue-600 pointer-events-none z-[100] hidden md:block mix-blend-difference"
         animate={{ x: x - 8, y: y - 8 }}
         transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
       />
