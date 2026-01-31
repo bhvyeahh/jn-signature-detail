@@ -9,7 +9,7 @@ import BookingEmail from "@/components/emails/BookingEmail";
 import OwnerNotificationEmail from "@/components/emails/OwnerNotificationEmail";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-12-15.clover", // Use standard API version
+  apiVersion: "2026-01-28.clover", // Use standard API version
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
